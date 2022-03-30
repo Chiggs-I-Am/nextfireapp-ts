@@ -9,14 +9,10 @@ export default function ImageUploader()
   const [ progress, setProgress ] = useState( 0 );
   const [ downloadURL, setDownloadURL ] = useState<string | null>( null );
 
-  const uploadFile = async ( e ) => {
+  const uploadFile = async ( e: ChangeEvent<HTMLInputElement> ) => {
     // Get the file
-    // const file = files[0];
-    // const imageFile = file = e.target.files[0];
-    const file = Array.from( e.target.files )[0];
+    const file = Array.from( e.target.files! )[0];
     const extension = file.type.split("/")[1];
-
-    console.log( file );
 
     // Makes a reference to the storage bucket location
     const fileRef = ref( storage, `uploads/${ auth.currentUser?.uid }/${ Date.now() }.${ extension }` );
